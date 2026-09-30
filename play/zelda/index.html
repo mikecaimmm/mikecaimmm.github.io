@@ -89,26 +89,25 @@
       // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
       // expected to change.
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
+      // Fixed render resolution: the game is framed for NES-style 16:15 (1024x960).
+      // Unity renders at exactly this size regardless of window size or OS display
+      // scaling; CSS then scales the canvas to fit the window.
+      var GAME_W = 1024, GAME_H = 960;
+      config.matchWebGLToCanvasSize = false;
+      canvas.width = GAME_W;
+      canvas.height = GAME_H;
+      canvas.style.imageRendering = "pixelated";
 
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-        document.querySelector("#unity-container").className = "unity-mobile";
-        canvas.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
-
-      } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+      function fitCanvas() {
+        var mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        var availW = window.innerWidth - (mobile ? 0 : 48);
+        var availH = window.innerHeight - (mobile ? 0 : 150); // room for back button + footer
+        var scale = Math.min(availW / GAME_W, availH / GAME_H);
+        canvas.style.width = Math.floor(GAME_W * scale) + "px";
+        canvas.style.height = Math.floor(GAME_H * scale) + "px";
       }
+      fitCanvas();
+      window.addEventListener("resize", fitCanvas);
 
       document.querySelector("#unity-loading-bar").style.display = "block";
 
