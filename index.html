@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mike Cai — Game Developer</title>
+  <meta name="description" content="Mike Cai — Computer Science student at the University of Michigan and game developer. Playable games, contributions, and screenshots.">
+  <meta name="theme-color" content="#2f4434">
+
+  <!-- Open Graph / Discord preview. Update og:url if your GitHub username or repo name differs. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mike Cai — Game Developer">
+  <meta property="og:description" content="Computer Science student at the University of Michigan making games that feel good to play.">
+  <meta property="og:url" content="https://mikecaimmm.github.io/">
+  <meta property="og:image" content="https://mikecaimmm.github.io/assets/img/zelda/05_gravity_flip.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c9a24a' stroke='%232a170c' stroke-width='2'/%3E%3Ctext x='16' y='21' font-size='12' text-anchor='middle' font-family='serif' font-weight='bold' fill='%232a170c'%3EMC%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER RAIL ============ -->
+  <header class="rail wood">
+    <a class="brand" href="#home" aria-label="Mike Cai — home">
+      <span class="coin">MC</span>
+      <span class="brand-text">Mike Cai · Game Developer</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav id="site-nav" class="tabs" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#collection" data-nav="collection">Collection</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#skills" data-nav="skills">Skills</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ================= HOME VIEW ================= -->
+    <div id="home-view">
+
+      <!-- HERO -->
+      <section id="home" class="felt hero" data-section>
+        <div class="sparkles" aria-hidden="true">
+          <i style="--x:48%;--y:8%;--d:0s"></i><i style="--x:92%;--y:22%;--d:-1.3s"></i>
+          <i style="--x:52%;--y:86%;--d:-2.2s"></i><i style="--x:80%;--y:92%;--d:-.7s"></i>
+          <i style="--x:6%;--y:90%;--d:-1.8s"></i><i style="--x:70%;--y:4%;--d:-2.8s"></i>
+        </div>
+
+        <div class="scroll parch reveal">
+          <span class="curl curl-l" aria-hidden="true"></span><span class="curl curl-r" aria-hidden="true"></span>
+          <p class="eyebrow center">✦ Welcome, traveler ✦</p>
+          <h1 class="hero-name">Mike Cai</h1>
+          <p class="hero-sub">Computer Science Student / Game Developer</p>
+          <hr class="rule">
+          <p class="hero-intro">“I build games that feel good to play — tight controls, readable systems, and mechanics with a twist.”</p>
+          <div class="btn-row center">
+            <a class="btn btn-gold" href="#collection">▶ Open Collection</a>
+            <a class="btn btn-wood" href="#contact">Contact</a>
+          </div>
+          <hr class="rule">
+          <div class="plaques">
+            <div class="plaque"><span>Guild</span><strong>University of Michigan</strong></div>
+            <div class="plaque"><span>Current quest</span><strong>EECS 494 · Game Design</strong></div>
+            <div class="plaque"><span>Weapon of choice</span><strong>Unity 6 · C#</strong></div>
+          </div>
+        </div>
+
+        <div class="featured reveal reveal-2">
+          <p class="eyebrow gold">✦ Featured card ✦</p>
+          <div id="featured-slot"><!-- filled by js/main.js from PROJECTS[0] --></div>
+          <p class="hint">Tilts with the cursor · click to inspect</p>
+        </div>
+      </section>
+
+      <!-- COLLECTION -->
+      <section id="collection" class="felt-2 section shelf-section" data-section>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow gold">I · The Collection</p>
+            <h2>My Games</h2>
+          </div>
+          <p class="meta" id="collection-count"></p>
+        </div>
+        <div class="shelf" id="collection-grid"><!-- cards rendered by js/main.js --></div>
+        <div class="ledge wood" aria-hidden="true"></div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="felt section" data-section>
+        <div class="split">
+          <div class="section-title">
+            <p class="eyebrow gold">II · The Adventurer</p>
+            <h2>About Me</h2>
+          </div>
+          <div class="parch framed about-card">
+            <!-- PORTRAIT: replace the placeholder div with
+                 <img src="assets/img/portrait.jpg" alt="Mike Cai"> -->
+            <div class="portrait">
+              <div class="portrait-inner">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                <span>Portrait</span>
+              </div>
+            </div>
+            <div class="about-body">
+              <!-- ABOUT: replace with 2–3 sentences about yourself (year, interests, what you like to make). -->
+              <p>I'm a Computer Science student at the University of Michigan who likes building games where the rules are simple to read and satisfying to master. I'm happiest working on player feel, combat, and the small systems that make a level click.</p>
+              <div class="plaques">
+                <div class="plaque"><span>Class</span><strong>Gameplay Programmer</strong></div>
+                <div class="plaque"><span>Guild</span><strong>UMich CS</strong></div>
+                <div class="plaque"><span>Main engine</span><strong>Unity 6</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="felt-2 section" data-section>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow gold">III · Inventory</p>
+            <h2>Technical Skills</h2>
+          </div>
+        </div>
+        <div class="inventory">
+          <div class="parch bag">
+            <div class="bag-head"><h3>Languages</h3><span></span></div>
+            <ul class="slots">
+              <li>C#</li><li>C++</li><li>Python</li>
+              <!-- Add more: <li>Java</li> -->
+            </ul>
+          </div>
+          <div class="parch bag">
+            <div class="bag-head"><h3>Engines &amp; Tools</h3><span></span></div>
+            <ul class="slots">
+              <li class="rare">Unity 6</li><li>Git / GitHub</li>
+              <!-- Add more: <li>Visual Studio</li> <li>Rider</li> <li>Blender</li> -->
+            </ul>
+          </div>
+          <div class="parch bag">
+            <div class="bag-head"><h3>Game Systems</h3><span></span></div>
+            <ul class="slots slots-small">
+              <li>2D physics &amp; collision</li><li>Player controllers</li>
+              <li>Combat &amp; weapons</li><li>UI / HUD</li>
+              <li>Audio integration</li><li>Level scripting &amp; puzzles</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="felt section contact" data-section>
+        <p class="eyebrow gold center">IV · The Notice Board</p>
+        <h2 class="center">Send a Raven</h2>
+        <div class="board wood">
+          <a class="note parch" href="mailto:mikecai@umich.edu" style="--r:-2deg;--pin:#b8392a">
+            <span>Email</span><strong>mikecai@umich.edu</strong>
+          </a>
+          <a class="note parch" href="https://github.com/mikecaimmm" target="_blank" rel="noopener" style="--r:1.5deg;--pin:#1f3a5c">
+            <span>GitHub</span><strong>github.com/mikecaimmm</strong>
+          </a>
+          <!-- LINKEDIN: replace href and text -->
+          <a class="note parch" href="https://www.linkedin.com/" target="_blank" rel="noopener" style="--r:-1deg;--pin:#6b4f14">
+            <span>LinkedIn</span><strong>LinkedIn profile</strong>
+          </a>
+          <!-- RÉSUMÉ: drop your PDF at assets/resume.pdf -->
+          <a class="note parch" href="assets/resume.pdf" target="_blank" rel="noopener" style="--r:2deg;--pin:#2f4434">
+            <span>Résumé</span><strong>Download PDF</strong>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= PROJECT VIEW (card inspection) ================= -->
+    <div id="project-view" class="felt" hidden>
+      <!-- rendered by js/main.js when the URL hash is a project id, e.g. #zelda -->
+    </div>
+  </main>
+
+  <footer class="wood footer">
+    <p class="foot-left">© 2026 Mike Cai · Built for EECS 494, University of Michigan</p>
+    <p class="foot-right">The Legend of Zelda is a trademark of Nintendo. This is a non-commercial student recreation made for coursework.</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <dialog id="lightbox" class="lightbox" aria-label="Screenshot viewer">
+    <div class="lb-frame">
+      <img id="lb-img" class="px" src="" alt="">
+      <p id="lb-cap" class="lb-cap"></p>
+      <p id="lb-count" class="lb-count"></p>
+    </div>
+    <button type="button" class="lb-btn lb-prev" aria-label="Previous screenshot">◀</button>
+    <button type="button" class="lb-btn lb-next" aria-label="Next screenshot">▶</button>
+    <button type="button" class="lb-btn lb-close" aria-label="Close viewer">✕</button>
+  </dialog>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
