@@ -72,7 +72,7 @@ const PROJECTS = [
     ],
 
     // ---- BUILD LINKS: paste your itch.io URLs here. Empty = button hidden. ----
-    playUrl: '',     // e.g. 'https://mikecaimmm.itch.io/zelda-dungeon'
+    playUrl: 'play/zelda/',  // web build hosted in this repo (or an itch.io URL)
     windowsUrl: '',  // itch.io page (downloads are on that page)
     macUrl: '',      // itch.io page
   },
@@ -161,7 +161,10 @@ let lightboxList = [];
 
 function buildButtons(p, big = false) {
   const b = [];
-  if (p.playUrl) b.push(`<a class="btn btn-gold" href="${p.playUrl}" target="_blank" rel="noopener">▶ Play on itch.io</a>`);
+  if (p.playUrl) {
+    const itch = /itch\.io/.test(p.playUrl);
+    b.push(`<a class="btn btn-gold" href="${p.playUrl}"${itch ? ' target="_blank" rel="noopener"' : ''}>▶ ${itch ? 'Play on itch.io' : 'Play in browser'}</a>`);
+  }
   if (p.windowsUrl) b.push(`<a class="btn btn-blue" href="${p.windowsUrl}" target="_blank" rel="noopener">${big ? 'Download for Windows' : '⬇ Windows'}</a>`);
   if (p.macUrl) b.push(`<a class="btn btn-blue" href="${p.macUrl}" target="_blank" rel="noopener">${big ? 'Download for macOS' : '⬇ macOS'}</a>`);
   return b.length ? `<div class="btn-row">${b.join('')}</div>` : '<p class="soon">Builds coming soon on itch.io.</p>';
