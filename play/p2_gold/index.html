@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2f4434">
+  <meta name="description" content="Play Swipe Crash, Mike Cai's p2_gold Unity puzzle and survival game.">
+  <title>Play Swipe Crash — Mike Cai</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    body { min-height: 100vh; }
+    .player-page { width: min(100% - 32px, 1040px); margin: 24px auto; }
+    .player-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .player-heading h1 { color: var(--parch); font-size: clamp(24px, 5vw, 36px); }
+    .player-frame { padding: 12px; border: 2px solid var(--bronze); border-radius: 12px; }
+    .game-stage { position: relative; aspect-ratio: 8 / 5; background: #171e2d; }
+    #unity-canvas { display: block; width: 100%; height: 100%; }
+    .loading { position: absolute; inset: 0; display: grid; place-content: center; gap: 14px; text-align: center; color: var(--parch); padding: 24px; }
+    progress { width: min(60vw, 320px); accent-color: var(--gold); }
+    .player-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 16px 8px 4px; color: var(--parch); }
+    .player-footer .btn { min-height: 42px; padding: 8px 16px; }
+    .player-footer button:disabled { opacity: .5; cursor: wait; }
+    .controls { padding: 22px; margin-top: 20px; }
+    .controls p + p { margin-top: 8px; }
+    .controls a { color: var(--blue-deep); }
+    #unity-warning { color: #7a2618; margin-top: 12px; padding: 16px; background: var(--parch); border-radius: 6px; }
+    #unity-canvas:fullscreen { width: 100vw; height: 100vh; object-fit: contain; background: #171e2d; }
+    @media (max-width: 600px) { .player-page { width: calc(100% - 16px); margin: 12px auto; } .player-frame { padding: 6px; } }
+  </style>
+  <script src="player.js" defer></script>
+</head>
+<body class="felt">
+  <main class="player-page">
+    <header class="player-heading">
+      <a class="btn btn-gold" href="../../#p2_gold">◀ Back to portfolio</a>
+      <div><p class="eyebrow gold">p2_gold · Unity WebGL</p><h1>Swipe Crash</h1></div>
+    </header>
+    <section class="wood player-frame" aria-label="Swipe Crash web player">
+      <div class="game-stage">
+        <canvas id="unity-canvas" width="960" height="600" tabindex="0" aria-label="Swipe Crash game. Use arrow keys to slide."></canvas>
+        <div id="unity-loading-bar" class="loading" role="status">
+          <p id="loading-status">Opening the game…</p>
+          <progress id="unity-progress" max="1" value="0" aria-label="Game loading progress"></progress>
+        </div>
+      </div>
+      <div class="player-footer">
+        <span>Swipe Crash · p2_gold</span>
+        <button id="unity-fullscreen-button" class="btn btn-blue" type="button" disabled>Fullscreen</button>
+      </div>
+    </section>
+    <div id="unity-warning" role="alert" hidden></div>
+    <section class="parch framed controls" aria-label="How to play">
+      <p><strong>Desktop keyboard required.</strong> Click the game to focus it. Press <strong>Enter or Space</strong> on the title screen, then choose a game mode. Use the <strong>arrow keys</strong> to slide.</p>
+      <p>Knock enemies into each other to merge them, or crush them against obstacles. Defeat enemies to restore energy and keep playing. An optional tutorial is available in the game menu.</p>
+      <p><a href="credits.txt">Music and font credits</a> · <a href="../../#collection">Explore the collection</a></p>
+    </section>
+  </main>
+</body>
+</html>

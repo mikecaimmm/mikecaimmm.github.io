@@ -76,12 +76,53 @@ const PROJECTS = [
     windowsUrl: '',  // itch.io page (downloads are on that page)
     macUrl: '',      // itch.io page
   },
+  {
+    id: 'p2_gold',
+    title: 'Swipe Crash — p2_gold',
+    cardTitle: 'Swipe Crash',
+    genre: 'Puzzle · Turn-based Survival',
+    role: 'Developer',
+    cost: 2,
+    term: 'Fall 2026',
+    course: 'EECS 494 · University of Michigan · Fall 2026 · p2_gold',
+    team: 'p2_gold',
+    badges: ['Unity 6', 'C#', 'WebGL'],
+    altBadges: ['p2_gold'],
+    blurb: 'Slide across the board, knock enemies into each other, and turn collisions into the energy you need to survive.',
+    hoverExtra: 'A starry-night puzzle game built around directional slides, enemy merging, and a carefully balanced energy economy.',
+    cover: 'assets/img/p2_gold/gameplay.jpg',
+    coverAlt: 'Swipe Crash gameplay: numbered characters on a grid beneath a starry sky',
+    overview: '<strong>Swipe Crash</strong> is a turn-based puzzle and survival game. Each arrow-key move sends the player sliding across the board, knocking enemies into one another to merge them or crushing them against obstacles. Defeating enemies restores the energy that keeps the player alive. The gold build adds an optional tutorial, animated feedback, a larger board, and mysterious shooting-star effects. Use the <strong>arrow keys</strong> to move; press <strong>Enter or Space</strong> on the title screen, then choose a game mode.',
+    abilities: [
+      { name: 'Directional Slide & Collision', icon: 'arrow', signature: true, text: 'Built the core slide mechanic and enemy collision interactions, with turn events driving the animation sequence.' },
+      { name: 'Energy & Balance', icon: 'heart', text: 'Iterated on enemy spawning, board size, merge progression, and energy rewards to keep movement choices meaningful.' },
+      { name: 'Animation & Onboarding', icon: 'flip', text: 'Used animated feedback and an optional tutorial to teach the slide-and-merge rules.' },
+      { name: 'Starry-night Surprises', icon: 'code', text: 'Added four mysterious effects that trigger randomly, inspired by wishes upon shooting stars.' },
+    ],
+    tech: [
+      { name: 'Unity 6', note: '6000.3', rare: true },
+      { name: 'C#' },
+      { name: 'Grid-based gameplay' },
+      { name: 'Event-driven turn animation' },
+      { name: 'Unity UI / TextMesh Pro' },
+      { name: 'WebGL', note: 'Playable in a desktop browser' },
+    ],
+    gallery: [
+      { title: 'Swipe Crash · The Gold Build', shots: [
+        { src: 'assets/img/p2_gold/gameplay.jpg', alt: 'Swipe Crash gameplay board with numbered enemies and an energy meter', caption: 'Slide, merge, and manage your energy to survive.' },
+        { src: 'assets/img/p2_gold/title.jpg', alt: 'Swipe Crash title screen against a painted starry-night backdrop', caption: 'A starry-night setting with an optional tutorial.' },
+      ]},
+    ],
+    playUrl: 'play/p2_gold/',
+    playLabel: 'Play Web Build',
+    buildDescription: 'Play the p2_gold WebGL build here. Desktop keyboard required: use the arrow keys to slide.',
+    windowsUrl: '',
+    macUrl: '',
+  },
 ];
 
 // Locked slots shown after the real projects ("sealed" card backs).
-const SEALED_SLOTS = [
-  { label: 'Sealed', sub: 'Project 2 · Unlocks later this semester' },
-];
+const SEALED_SLOTS = [];
 const TOTAL_SLOTS = 3; // shelf size; remaining slots render as empty outlines
 
 /* ---------------- icons ---------------- */
@@ -163,7 +204,7 @@ function buildButtons(p, big = false) {
   const b = [];
   if (p.playUrl) {
     const itch = /itch\.io/.test(p.playUrl);
-    b.push(`<a class="btn btn-gold" href="${p.playUrl}"${itch ? ' target="_blank" rel="noopener"' : ''}>▶ ${itch ? 'Play on itch.io' : 'Play in browser'}</a>`);
+    b.push(`<a class="btn btn-gold" href="${p.playUrl}"${itch ? ' target="_blank" rel="noopener"' : ''}>▶ ${p.playLabel || (itch ? 'Play on itch.io' : 'Play in browser')}</a>`);
   }
   if (p.windowsUrl) b.push(`<a class="btn btn-blue" href="${p.windowsUrl}" target="_blank" rel="noopener">${big ? 'Download for Windows' : '⬇ Windows'}</a>`);
   if (p.macUrl) b.push(`<a class="btn btn-blue" href="${p.macUrl}" target="_blank" rel="noopener">${big ? 'Download for macOS' : '⬇ macOS'}</a>`);
@@ -240,7 +281,7 @@ function renderProject(p) {
       <div>
         <p class="eyebrow gold">V – VII · Claim your copy</p>
         <h2 id="h-build">Play the game</h2>
-        <p>Web build plus Windows and macOS standalone builds, hosted on itch.io.</p>
+        <p>${p.buildDescription || 'Play the web build in your browser.'}</p>
       </div>
       ${buildButtons(p, true)}
     </section>`;

@@ -1,0 +1,2 @@
+# Preserve exported Unity runtime bytes across Windows and GitHub Pages.
+play/p2_gold/Build/* -text -diff

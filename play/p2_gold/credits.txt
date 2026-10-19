@@ -1,0 +1,20 @@
+SWIPE CRASH - CREDITS
+
+MUSIC
+-----
+"Space Ambient" by SolarFLEX
+Source: Pixabay (track ID 569588)
+Artist page: https://pixabay.com/users/solarflex-54712313/
+License: Pixabay Content License - https://pixabay.com/service/license-summary/
+
+
+FONTS
+-----
+Lavishly Yours
+Designed by Robert Leuschke (TypeSETit)
+Copyright 2014-2021 The Lavishly Yours Project Authors (https://github.com/googlefonts/lavishly-yours)
+License: SIL Open Font License, Version 1.1 - https://openfontlicense.org
+
+Liberation Sans (TextMesh Pro default font)
+Copyright Red Hat, Inc.
+License: SIL Open Font License, Version 1.1 - https://openfontlicense.org
