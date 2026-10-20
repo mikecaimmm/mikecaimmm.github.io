@@ -116,6 +116,32 @@ const PROJECTS = [
     playUrl: 'play/p2_gold/',
     playLabel: 'Play Web Build',
     buildDescription: 'Play the p2_gold WebGL build here. Desktop keyboard required: use the arrow keys to slide.',
+    creditsUrl: 'play/p2_gold/credits.txt',
+    credits: [
+      {
+        name: 'Music · “Space Ambient”', icon: 'sound',
+        text: 'By SolarFLEX. Source: Pixabay, track ID 569588.',
+        links: [
+          { label: 'SolarFLEX on Pixabay', url: 'https://pixabay.com/users/solarflex-54712313/' },
+          { label: 'Pixabay Content License', url: 'https://pixabay.com/service/license-summary/' },
+        ],
+      },
+      {
+        name: 'Font · Lavishly Yours', icon: 'code',
+        text: 'Designed by Robert Leuschke (TypeSETit). Copyright 2014–2021 The Lavishly Yours Project Authors.',
+        links: [
+          { label: 'Lavishly Yours project', url: 'https://github.com/googlefonts/lavishly-yours' },
+          { label: 'SIL Open Font License, Version 1.1', url: 'https://openfontlicense.org' },
+        ],
+      },
+      {
+        name: 'Font · Liberation Sans', icon: 'code',
+        text: 'TextMesh Pro default font. Copyright Red Hat, Inc.',
+        links: [
+          { label: 'SIL Open Font License, Version 1.1', url: 'https://openfontlicense.org' },
+        ],
+      },
+    ],
     windowsUrl: '',
     macUrl: '',
   },
@@ -235,6 +261,19 @@ function renderProject(p) {
     </li>`).join('');
 
   const tech = p.tech.map(t => `<li class="${t.rare ? 'rare' : ''}"><span>${t.name}</span>${t.note ? `<small>${t.note}</small>` : ''}</li>`).join('');
+  const creditsHTML = p.credits?.length ? `
+    <section class="parch framed panel project-credits" aria-labelledby="h-credits">
+      <div class="panel-head"><h2 id="h-credits">Credits</h2><span></span></div>
+      <ul class="abilities">${p.credits.map(c => `
+        <li class="ability">
+          <span class="token">${icon(c.icon)}</span>
+          <div><h3>${c.name}</h3><p>${c.text}</p>
+            <p>${c.links.map(link => `<a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join(' · ')}</p>
+          </div>
+        </li>`).join('')}
+      </ul>
+      ${p.creditsUrl ? `<p><a href="${p.creditsUrl}">View original credits.txt</a></p>` : ''}
+    </section>` : '';
 
   const view = document.getElementById('project-view');
   view.innerHTML = `
@@ -276,6 +315,8 @@ function renderProject(p) {
       <div class="panel-head"><h2 id="h-gallery">IV · Gameplay Screenshots</h2><span></span><small>Click to enlarge · ◀ ▶ keys</small></div>
       ${galleryHTML}
     </section>
+
+    ${creditsHTML}
 
     <section class="wood build-plaque" aria-labelledby="h-build">
       <div>

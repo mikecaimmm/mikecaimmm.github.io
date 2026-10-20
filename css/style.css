@@ -407,6 +407,8 @@ a { color: var(--gold-hi); }
 .panel-head span { flex: 1; height: 1px; background: var(--gold); }
 .panel-head small { font-family: var(--display); font-size: 10px; letter-spacing: .14em; color: var(--bronze); text-transform: uppercase; }
 .panel p { font-size: 19px; line-height: 1.6; }
+.project-credits .abilities { grid-template-columns: 1fr; }
+.project-credits a { color: var(--blue-deep); text-underline-offset: 3px; }
 .play-plaque { padding: 20px 24px; border-radius: 10px; border: 3px solid var(--wood-dark); box-shadow: 0 10px 24px rgba(0,0,0,.5); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .play-plaque .label { font-family: var(--display); font-weight: 700; font-size: 11px; letter-spacing: .2em; color: var(--gold-hi); text-transform: uppercase; }
 .play-plaque .line { flex: 1; min-width: 20px; height: 1px; background: rgba(233,200,106,.4); }
