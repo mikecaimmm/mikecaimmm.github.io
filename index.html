@@ -47,6 +47,13 @@
     .engineering-highlight-number { display: block; color: #704f20; font: 700 clamp(1.8rem, 3vw, 2.5rem) 'Cinzel',Georgia,serif; line-height: 1.25; }
     .engineering-highlight strong { display: block; color: #352518; margin: .22rem 0 .32rem; }
     .engineering-highlight small { display: block; color: #5c4832; line-height: 1.45; }
+    .detail-back { padding: 28px var(--pad) 0; }
+    .detail-title { color: var(--cream); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; }
+    .engineering-intro h2 { color: var(--ink); font-size: 26px; text-shadow: none; margin-bottom: 12px; }
+    .engineering-highlight-number { font-size: clamp(1.25rem, 2.2vw, 1.7rem) !important; }
+    .project-notice { color: var(--sage); font-size: 14px; font-style: italic; }
+    .about-body .btn-row { margin-top: 4px; }
+    .detail-view.entering { animation: enter .5s var(--ease-out) both; }
     @media (max-width: 740px) {
       .engineering-layout { grid-template-columns: 1fr; }
       .engineering-impact { border-left: 0; border-top: 1px solid rgba(92,65,30,.3); padding: 1rem 0 0; }
@@ -61,15 +68,16 @@
   <header class="rail wood">
     <a class="brand" href="#home" aria-label="Mike Cai — home">
       <span class="coin">MC</span>
-      <span class="brand-text">Mike Cai</span>
+      <span class="brand-text">Mike Cai · Game & Software Developer</span>
     </a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav id="site-nav" class="tabs" aria-label="Main">
       <a href="#home" data-nav="home">Home</a>
-      <a href="#collection" data-nav="collection">Work</a>
+      <a href="#collection" data-nav="collection">Games</a>
       <a href="#about" data-nav="about">About</a>
+      <a href="#skills" data-nav="skills">Skills</a>
       <a href="#contact" data-nav="contact">Contact</a>
     </nav>
   </header>
@@ -78,52 +86,59 @@
     <!-- ================= HOME VIEW ================= -->
     <div id="home-view">
 
-      <section id="home" class="felt hero showcase-hero" data-section>
-        <div class="scroll parch">
+      <!-- HERO -->
+      <section id="home" class="felt hero" data-section>
+        <div class="sparkles" aria-hidden="true">
+          <i style="--x:48%;--y:8%;--d:0s"></i><i style="--x:92%;--y:22%;--d:-1.3s"></i>
+          <i style="--x:52%;--y:86%;--d:-2.2s"></i><i style="--x:80%;--y:92%;--d:-.7s"></i>
+          <i style="--x:6%;--y:90%;--d:-1.8s"></i><i style="--x:70%;--y:4%;--d:-2.8s"></i>
+        </div>
+
+        <div class="scroll parch reveal">
           <span class="curl curl-l" aria-hidden="true"></span><span class="curl curl-r" aria-hidden="true"></span>
+          <p class="eyebrow center">✦ Welcome, traveler ✦</p>
           <h1 class="hero-name">Mike Cai</h1>
           <p class="hero-sub">Game &amp; Software Developer</p>
-          <p class="hero-intro">Games, graphics, and tools.</p>
-          <p class="hero-school">Michigan CS · 2027</p>
+          <hr class="rule">
+          <p class="hero-intro">“I build games, graphics, and software.”</p>
+          <div class="btn-row center">
+            <a class="btn btn-gold" href="#collection">▶ View Games</a>
+            <a class="btn btn-wood" href="#contact">Contact</a>
+          </div>
+          <hr class="rule">
+          <div class="plaques">
+            <div class="plaque"><span>School</span><strong>University of Michigan</strong></div>
+            <div class="plaque"><span>Degree</span><strong>Computer Science · 2027</strong></div>
+            <div class="plaque"><span>Focus</span><strong>Games · Graphics · Systems</strong></div>
+          </div>
+        </div>
+
+        <div class="featured reveal reveal-2">
+          <p class="eyebrow gold">✦ Featured Game ✦</p>
+          <div id="featured-slot"><!-- filled by js/main.js from PROJECTS[0] --></div>
+          <p class="hint">Click to explore</p>
         </div>
       </section>
 
-      <section id="collection" class="felt-2 section shelf-section showcase-work" data-section>
-        <div class="section-head"><h2>Selected Work</h2></div>
-        <div class="shelf" id="collection-grid"></div>
+      <!-- COLLECTION -->
+      <section id="collection" class="felt-2 section shelf-section" data-section>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow gold">I · The Collection</p>
+            <h2>Games</h2>
+          </div>
+        </div>
+        <div class="shelf" id="collection-grid"><!-- cards rendered by js/main.js --></div>
         <div class="ledge wood" aria-hidden="true"></div>
       </section>
 
-      <section id="about" class="felt section about-preview" data-section>
-        <div><h2>About</h2><p>Michigan CS student building playful, useful software.</p></div>
-        <a class="btn btn-wood" href="#profile">More about me →</a>
-      </section>
-
-      <section id="contact" class="felt-2 section contact-preview" data-section>
-        <h2>Contact</h2>
-        <div class="btn-row">
-          <a class="btn btn-gold" href="mailto:mikecai0326@gmail.com">Email</a>
-          <a class="btn btn-wood" href="https://github.com/mikecaimmm" target="_blank" rel="noopener">GitHub ↗</a>
-          <a class="btn btn-wood" href="assets/resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
-        </div>
-      </section>
-    </div>
-
-    <!-- ================= PROJECT VIEW (card inspection) ================= -->
-    <div id="project-view" class="felt" hidden>
-      <!-- rendered by js/main.js when the URL hash is a project id, e.g. #zelda -->
-    </div>
-
-    <div class="felt detail-view" data-detail="lstp" data-title="LSTP Config" hidden>
-      <div class="pv-top detail-back"><a class="btn btn-wood" href="#collection">◀ Back to work</a></div>
-      <!-- ================= SYSTEMS & OPEN SOURCE ================= -->
-      <section id="lstp-details" class="felt section engineering-section">
+      <!-- ================= EXPERIENCE ================= -->
+      <section id="experience" class="felt section engineering-section" data-section>
         <div class="section-head">
           <div>
-            <p class="eyebrow gold">NVIDIA · 2026</p>
-            <h1 class="detail-title">LSTP Config</h1>
+            <p class="eyebrow gold">II · Experience</p>
+            <h2>Experience</h2>
           </div>
-
         </div>
 
         <article class="parch framed engineering-card" aria-labelledby="lstp-title">
@@ -134,7 +149,150 @@
 
           <div class="engineering-layout">
             <div class="engineering-intro">
-              <h2 id="lstp-title">Overview</h2>
+              <h3 id="lstp-title">LSTP Config</h3>
+              <p class="engineering-subtitle">Embedded configuration tool</p>
+              <p>Implemented a tool that reads and writes board configurations using YAML.</p>
+              <div class="engineering-tags" aria-label="Technologies">
+                <span>C</span><span>Linux</span><span>libusb</span><span>YAML</span><span>Embedded</span>
+              </div>
+              <div class="engineering-links">
+                <a class="btn btn-gold" href="#lstp">View Details</a>
+                <a class="btn btn-wood" href="https://github.com/NVIDIA/lstp-config" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+              </div>
+            </div>
+
+            <aside class="engineering-impact" aria-label="Project highlights">
+              <p class="eyebrow gold">Highlights</p>
+              <div class="engineering-highlight">
+                <span class="engineering-highlight-number">1 command</span>
+                <small>Apply a YAML configuration.</small>
+              </div>
+              <div class="engineering-highlight">
+                <span class="engineering-highlight-number">Reusable firmware</span>
+                <small>Support different boards.</small>
+              </div>
+              <div class="engineering-highlight">
+                <span class="engineering-highlight-number">Read / Write</span>
+                <small>Manage board configurations.</small>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="felt section" data-section>
+        <div class="split">
+          <div class="section-title">
+            <p class="eyebrow gold">III · The Adventurer</p>
+            <h2>About Me</h2>
+          </div>
+          <div class="parch framed about-card">
+            <!-- PORTRAIT: replace the placeholder div with
+                 <img src="assets/img/portrait.jpg" alt="Mike Cai"> -->
+            <div class="portrait">
+              <div class="portrait-inner">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                <span>Portrait</span>
+              </div>
+            </div>
+            <div class="about-body">
+              <p>Michigan CS student focused on games, graphics, and systems.</p>
+              <div class="plaques">
+                <div class="plaque"><span>Class</span><strong>Developer</strong></div>
+                <div class="plaque"><span>Guild</span><strong>Michigan CS</strong></div>
+                <div class="plaque"><span>Focus</span><strong>Graphics &amp; Systems</strong></div>
+              </div>
+              <div class="btn-row"><a class="btn btn-wood" href="#profile">More About Me</a></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="felt-2 section" data-section>
+        <div class="section-head">
+          <div>
+            <p class="eyebrow gold">IV · Inventory</p>
+            <h2>Technical Skills</h2>
+          </div>
+        </div>
+        <div class="inventory">
+          <div class="parch bag">
+            <div class="bag-head"><h3>Languages</h3><span></span></div>
+            <ul class="slots">
+              <li class="rare">C#</li><li>C++</li><li>C</li><li>Python</li>
+              <li>Go</li><li>JavaScript</li><li>HTML / CSS</li><li>SQL</li>
+            </ul>
+          </div>
+          <div class="parch bag">
+            <div class="bag-head"><h3>Tools</h3><span></span></div>
+            <ul class="slots">
+              <li class="rare">Unity / C#</li><li>Git / GitHub</li>
+              <li>Docker</li><li>AWS</li><li>PyTorch</li><li>TensorFlow</li>
+              <li>NumPy / Pandas</li><li>Flask / React</li>
+            </ul>
+          </div>
+          <div class="parch bag">
+            <div class="bag-head"><h3>Systems</h3><span></span></div>
+            <ul class="slots slots-small">
+              <li>Real-time simulation</li><li>GPU compute shaders</li>
+              <li>Collision detection / BVH</li><li>Ray tracing</li>
+              <li>Multithreading / sockets</li><li>Distributed systems / MapReduce</li>
+              <li>Computer vision</li><li>LLMs / RAG</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="felt section contact" data-section>
+        <p class="eyebrow gold center">V · The Notice Board</p>
+        <h2 class="center">Contact</h2>
+        <div class="board wood">
+          <a class="note parch" href="mailto:mikecai0326@gmail.com" style="--r:-2deg;--pin:#b8392a">
+            <span>Email</span><strong>mikecai0326@gmail.com</strong>
+          </a>
+          <a class="note parch" href="https://github.com/mikecaimmm" target="_blank" rel="noopener" style="--r:1.5deg;--pin:#1f3a5c">
+            <span>GitHub</span><strong>github.com/mikecaimmm</strong>
+          </a>
+          <div class="note parch" style="--r:-1deg;--pin:#6b4f14">
+            <span>Location</span><strong>Ann Arbor, Michigan</strong>
+          </div>
+          <!-- RÉSUMÉ: drop your PDF at assets/resume.pdf -->
+          <a class="note parch" href="assets/resume.pdf" target="_blank" rel="noopener" style="--r:2deg;--pin:#2f4434">
+            <span>Résumé</span><strong>Download PDF</strong>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= PROJECT VIEW (card inspection) ================= -->
+    <div id="project-view" class="felt" hidden>
+      <!-- rendered by js/main.js when the URL hash is a project id, e.g. #zelda -->
+    </div>
+
+    <!-- ================= DETAIL PAGES (shown by URL hash) ================= -->
+    <div class="felt detail-view" data-detail="lstp" data-title="LSTP Config" data-nav="" hidden>
+      <div class="pv-top detail-back"><a class="btn btn-wood" href="#experience">◀ Back to Experience</a></div>
+      <!-- full LSTP write-up -->
+      <section id="lstp-details" class="felt section engineering-section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow gold">Experience · NVIDIA · 2026</p>
+            <h1 class="detail-title">LSTP Config</h1>
+          </div>
+        </div>
+
+        <article class="parch framed engineering-card" aria-labelledby="lstp-detail-title">
+          <div class="engineering-topline">
+            <span class="engineering-stamp">NVIDIA · SOFTWARE ENGINEERING INTERN</span>
+            <span class="engineering-year">2026</span>
+          </div>
+
+          <div class="engineering-layout">
+            <div class="engineering-intro">
+              <h2 id="lstp-detail-title">Overview</h2>
               <p class="engineering-subtitle">Implemented an open-source, configuration-driven tool for embedded hardware</p>
               <p>
                 <strong>My role:</strong> During my NVIDIA internship, I implemented LSTP Config from
@@ -184,17 +342,15 @@
           </div>
         </article>
       </section>
-
-
     </div>
-    <div class="felt detail-view" data-detail="profile" data-title="About Mike" hidden>
+
+    <div class="felt detail-view" data-detail="profile" data-title="About Mike" data-nav="about" hidden>
       <div class="pv-top detail-back"><a class="btn btn-wood" href="#about">◀ Back</a></div>
-      <!-- ABOUT -->
       <section id="profile-about" class="felt section">
         <div class="split">
           <div class="section-title">
             <p class="eyebrow gold">Background</p>
-            <h1 class="detail-title">About Mike</h1>
+            <h1 class="detail-title">About Me</h1>
           </div>
           <div class="parch framed about-card">
             <div class="about-body">
@@ -208,45 +364,6 @@
           </div>
         </div>
       </section>
-
-
-      <!-- SKILLS -->
-      <section id="skills" class="felt-2 section">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow gold">Skills</p>
-            <h2>Toolkit</h2>
-          </div>
-        </div>
-        <div class="inventory">
-          <div class="parch bag">
-            <div class="bag-head"><h3>Languages</h3><span></span></div>
-            <ul class="slots">
-              <li class="rare">C#</li><li>C++</li><li>C</li><li>Python</li>
-              <li>Go</li><li>JavaScript</li><li>HTML / CSS</li><li>SQL</li>
-            </ul>
-          </div>
-          <div class="parch bag">
-            <div class="bag-head"><h3>Engines &amp; Tools</h3><span></span></div>
-            <ul class="slots">
-              <li class="rare">Unity / C#</li><li>Git / GitHub</li>
-              <li>Docker</li><li>AWS</li><li>PyTorch</li><li>TensorFlow</li>
-              <li>NumPy / Pandas</li><li>Flask / React</li>
-            </ul>
-          </div>
-          <div class="parch bag">
-            <div class="bag-head"><h3>Systems &amp; Real-time Tech</h3><span></span></div>
-            <ul class="slots slots-small">
-              <li>Real-time simulation</li><li>GPU compute shaders</li>
-              <li>Collision detection / BVH</li><li>Ray tracing</li>
-              <li>Multithreading / sockets</li><li>Distributed systems / MapReduce</li>
-              <li>Computer vision</li><li>LLMs / RAG</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-
     </div>
   </main>
 
