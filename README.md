@@ -8,11 +8,12 @@ Static site: plain HTML, CSS and vanilla JavaScript. No build step — open `ind
 ## Structure
 
 ```
-index.html            page shell (hero, collection, about, skills, contact)
+index.html            brief homepage + full profile and engineering detail views
 css/style.css         all styling; colors are CSS variables in :root
 js/main.js            PROJECTS data array + rendering, routing, tilt, lightbox
 assets/img/zelda/     screenshots for the Zelda project
 assets/img/p2_gold/   screenshots for Swipe Crash
+assets/img/lstp/      original diagram for the LSTP Config card
 play/zelda/           existing Zelda WebGL player
 play/p2_gold/         Swipe Crash (p2_gold) WebGL player and compiled build
 .nojekyll             tells GitHub Pages to serve files as-is
@@ -25,7 +26,9 @@ play/p2_gold/         Swipe Crash (p2_gold) WebGL player and compiled build
    (`id`, titles, `abilities`, `tech`, `gallery`, `playUrl` / `windowsUrl` / `macUrl`).
 3. Reduce `SEALED_SLOTS` by one if the new game replaces a locked card.
 
-The featured card is always `PROJECTS[0]`; the case-study page lives at `/#<id>`.
+The homepage shows short titles, one-line `summary` captions, and two badges per
+card. Full game case studies live at `/#<id>`. The engineering card opens `/#lstp`,
+and `/#profile` contains the full bio and toolkit (`/#skills` still opens it).
 
 ## Swipe Crash / p2_gold
 
@@ -45,7 +48,7 @@ export, decompressing .br payloads if needed, and verify the player paths and si
 ## Placeholders to fill in
 
 - `js/main.js` → `playUrl`, `windowsUrl`, `macUrl` (itch.io links; empty = buttons hidden)
-- `index.html` → About paragraph, portrait image, LinkedIn URL
+- `index.html` → full bio and engineering case study
 - `assets/resume.pdf` → drop in your résumé
 
 ## Deploying (GitHub Pages)

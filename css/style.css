@@ -544,3 +544,34 @@ a { color: var(--gold-hi); }
   .play-plaque .line { display: none; }
   .lb-prev, .lb-next { top: auto; bottom: 20px; transform: none; }
 }
+
+/* Brief exhibition; full write-ups live behind project and profile links. */
+.showcase-hero { display: block; padding: 24px var(--pad); }
+.showcase-hero .scroll { max-width: 860px; margin: 0 auto; padding: 20px 28px; gap: 8px; }
+.showcase-hero .hero-name { font-size: clamp(42px, 5vw, 56px); }
+.showcase-hero .hero-intro { font-size: 18px; font-style: normal; }
+.hero-school { text-align: center; color: var(--ink-soft); font-size: 15px; }
+.showcase-work { padding-top: 30px; padding-bottom: 64px; }
+.showcase-work .section-head { margin-bottom: 24px; }
+.showcase-work h2, .about-preview h2, .contact-preview h2 { font-size: clamp(27px, 3vw, 34px); }
+.card-compact .ribbon h3 { font-size: 19px; }
+.card-compact .card-art { aspect-ratio: 16 / 10; }
+.card-compact .card-text { gap: 10px; padding: 16px; }
+.card-compact .card-text .blurb { font-size: 18px; }
+.card-compact .type-line { min-height: 15px; }
+.about-preview { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding-top: 36px; padding-bottom: 36px; }
+.about-preview p { margin-top: 10px; color: var(--parch); }
+.contact-preview { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; padding-top: 36px; padding-bottom: 36px; }
+.detail-back { padding: 28px var(--pad) 0; }
+.detail-title { color: var(--cream); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; }
+.engineering-intro h2 { color: var(--ink); font-size: 26px; text-shadow: none; margin-bottom: 12px; }
+.project-notice { color: var(--sage); font-size: 14px; }
+@media (max-width: 860px) {
+  .showcase-work .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; margin: 0; padding: 0; scroll-snap-type: none; }
+}
+@media (max-width: 560px) {
+  .showcase-hero { padding-top: 24px; }
+  .showcase-work .shelf { grid-template-columns: 1fr; }
+  .showcase-work .card { max-width: 420px; margin: 0 auto; }
+  .contact-preview .btn-row { width: 100%; }
+}

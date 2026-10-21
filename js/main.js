@@ -3,15 +3,18 @@
 
    To add a new game: copy the object in PROJECTS below, change
    the fields, and drop its screenshots in assets/img/<id>/.
-   The collection shelf, featured card and case-study page are
-   all generated from this array. You never touch the layout.
+   The collection shelf and game case-study pages are generated
+   from this array. Engineering and profile details live in index.html.
    ========================================================= */
 
 const PROJECTS = [
   {
     id: 'zelda',                                   // used in the URL: /#zelda
-    title: 'The Legend of Zelda — Dungeon 1 Recreation + Custom “Gravity” Dungeon',
-    cardTitle: 'The Legend of Zelda — Dungeon 1 + Gravity Dungeon',
+    title: 'Zelda: Gravity Dungeon',
+    notice: 'The Legend of Zelda is a trademark of Nintendo. This non-commercial student recreation was made for coursework.',
+    cardTitle: 'Zelda',
+    summary: 'A classic dungeon. A gravity twist.',
+    shortGenre: 'Adventure',
     genre: 'Action-Adventure · Dungeon Crawler',
     role: 'Programmer',
     cost: 1,                                       // the number in the blue gem
@@ -78,8 +81,10 @@ const PROJECTS = [
   },
   {
     id: 'p2_gold',
-    title: 'Swipe Crash — p2_gold',
+    title: 'Swipe Crash',
     cardTitle: 'Swipe Crash',
+    summary: 'Slide. Merge. Survive.',
+    shortGenre: 'Puzzle',
     genre: 'Puzzle · Turn-based Survival',
     role: 'Developer',
     cost: 2,
@@ -145,6 +150,23 @@ const PROJECTS = [
     windowsUrl: '',
     macUrl: '',
   },
+  {
+    id: 'lstp',
+    kind: 'engineering',
+    title: 'LSTP Config',
+    cardTitle: 'LSTP Config',
+    genre: 'Embedded Systems',
+    shortGenre: 'Developer Tool',
+    summary: 'Configure boards with YAML.',
+    blurb: 'A configuration tool for embedded hardware.',
+    role: 'Developer',
+    cost: 3,
+    term: '2026',
+    team: 'NVIDIA',
+    badges: ['C', 'Linux', 'YAML'],
+    cover: 'assets/img/lstp/cover.svg',
+    coverAlt: 'A YAML configuration flows through LSTP to an embedded board',
+  },
 ];
 
 // Locked slots shown after the real projects ("sealed" card backs).
@@ -167,10 +189,11 @@ const icon = (name, size = 16, sw = 2.4) =>
 
 /* ---------------- card markup ---------------- */
 function cardHTML(p, { art = p.cover, alt = p.coverAlt, asLink = true } = {}) {
+  const compact = asLink;
   const tag = asLink ? 'a' : 'div';
   const href = asLink ? ` href="#${p.id}" aria-label="Inspect card: ${p.cardTitle}"` : '';
   return `
-  <${tag} class="card"${href} data-tilt>
+  <${tag} class="card${compact ? ' card-compact' : ''}"${href} data-tilt>
     <div class="card-inner">
       <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
       <div class="card-art">
@@ -181,18 +204,18 @@ function cardHTML(p, { art = p.cover, alt = p.coverAlt, asLink = true } = {}) {
       <div class="ribbon"><h3>${p.cardTitle}</h3></div>
       <div class="card-text parch">
         <div class="type-line">
-          <span class="genre">${p.genre}</span>
-          <span class="role" title="My role">${icon('code', 13)}${p.role}</span>
+          <span class="genre">${compact ? (p.shortGenre || p.genre) : p.genre}</span>
+          ${compact ? '' : `<span class="role" title="My role">${icon('code', 13)}${p.role}</span>`}
         </div>
         <hr class="rule">
-        <p class="blurb">${p.blurb}</p>
-        <div class="extra"><p>${p.hoverExtra}</p></div>
+        <p class="blurb">${compact ? (p.summary || p.blurb) : p.blurb}</p>
+        ${compact ? '' : `<div class="extra"><p>${p.hoverExtra || ''}</p></div>`}
         <ul class="badges">
-          ${p.badges.map(b => `<li>${b}</li>`).join('')}
-          ${(p.altBadges || []).map(b => `<li class="alt">${b}</li>`).join('')}
+          ${(compact ? p.badges.slice(0, 2) : p.badges).map(b => `<li>${b}</li>`).join('')}
+          ${(compact ? [] : (p.altBadges || [])).map(b => `<li class="alt">${b}</li>`).join('')}
         </ul>
       </div>
-      <div class="card-foot"><span>EECS 494 · ${p.term}</span><span class="go">${asLink ? '▶ Inspect' : p.team}</span></div>
+      <div class="card-foot"><span>${compact ? (p.kind === 'engineering' ? 'NVIDIA' : 'Game') : `EECS 494 · ${p.term}`}</span><span class="go">${asLink ? 'View →' : p.team}</span></div>
     </div>
   </${tag}>`;
 }
@@ -210,16 +233,14 @@ function sealedHTML(s) {
 
 /* ---------------- home rendering ---------------- */
 function renderHome() {
-  const featured = PROJECTS[0];
-  document.getElementById('featured-slot').innerHTML = featured ? cardHTML(featured) : '';
-
   const grid = document.getElementById('collection-grid');
   const parts = PROJECTS.map(p => cardHTML(p, { art: p.shelfArt || p.cover, alt: p.shelfAlt || p.coverAlt }));
   SEALED_SLOTS.forEach(s => parts.push(sealedHTML(s)));
   while (parts.length < TOTAL_SLOTS) parts.push('<div class="slot-empty" aria-hidden="true">EMPTY SLOT</div>');
   grid.innerHTML = parts.join('');
 
-  document.getElementById('collection-count').textContent =
+  const count = document.getElementById('collection-count');
+  if (count) count.textContent =
     `${PROJECTS.length} / ${PROJECTS.length + SEALED_SLOTS.length} cards collected · more each semester`;
 }
 
@@ -325,7 +346,8 @@ function renderProject(p) {
         <p>${p.buildDescription || 'Play the web build in your browser.'}</p>
       </div>
       ${buildButtons(p, true)}
-    </section>`;
+    </section>
+    ${p.notice ? `<p class="project-notice">${p.notice}</p>` : ''}`;
 
   view.querySelectorAll('[data-lb]').forEach(btn =>
     btn.addEventListener('click', () => openLightbox(+btn.dataset.lb)));
@@ -336,24 +358,33 @@ function renderProject(p) {
 const homeView = document.getElementById('home-view');
 const projectView = document.getElementById('project-view');
 
+const detailViews = [...document.querySelectorAll('[data-detail]')];
+
 function route() {
   const id = decodeURIComponent(location.hash.slice(1));
-  const project = PROJECTS.find(p => p.id === id);
+  const project = PROJECTS.find(p => p.id === id && p.kind !== 'engineering');
+  const detail = detailViews.find(view => view.dataset.detail === id || (id === 'skills' && view.dataset.detail === 'profile'));
+  const wasDetail = homeView.hidden;
+
+  detailViews.forEach(view => { view.hidden = view !== detail; });
+  homeView.hidden = !!(project || detail);
+  projectView.hidden = !project;
 
   if (project) {
     renderProject(project);
-    homeView.hidden = true;
-    projectView.hidden = false;
     projectView.classList.remove('entering'); void projectView.offsetWidth; projectView.classList.add('entering');
     document.title = `${project.cardTitle} — Mike Cai`;
-    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setActive('collection');
+  } else if (detail) {
+    document.title = `${detail.dataset.title} — Mike Cai`;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setActive(detail.dataset.detail === 'profile' ? 'about' : 'collection');
+    if (id === 'skills') requestAnimationFrame(() => document.getElementById('skills').scrollIntoView());
   } else {
-    const wasProject = !projectView.hidden;
-    projectView.hidden = true;
-    homeView.hidden = false;
-    document.title = 'Mike Cai — Game Developer';
-    if (wasProject && id) {
+    document.title = 'Mike Cai — Games & Software';
+    setActive(id || 'home');
+    if (wasDetail && id) {
       const target = document.getElementById(id);
       if (target) requestAnimationFrame(() => target.scrollIntoView());
     }
@@ -372,7 +403,7 @@ function setActive(key) {
   });
 }
 const sectionObserver = new IntersectionObserver(entries => {
-  if (!projectView.hidden) return;
+  if (homeView.hidden) return;
   entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
 }, { rootMargin: '-45% 0px -50% 0px' });
 document.querySelectorAll('[data-section]').forEach(s => sectionObserver.observe(s));
